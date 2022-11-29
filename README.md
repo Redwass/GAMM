@@ -3,7 +3,7 @@ The Star Schema Benchmark, or SSB, was designed to evaluate the performance of d
 
 We generated the same ssb schema using the graph approach called Graph Star Schema Benchmark as shown in the figure below. The 13 SSB queries were built using Cypher Language Request (CLR) specific to the Neo4j graph database.
 
-![Cover](https://github.com/Redwass/test/blob/main/figures/gamm_schema_evolution.jpg)
+![Cover](https://github.com/Redwass/GAMM/blob/main/figures/gamm_schema_evolution.jpg)
 
 ## 1. Platform, data and installation. 
 
