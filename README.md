@@ -20,7 +20,7 @@ We were able to apply the 13 queries proposed on SSB which we took up in CRL eit
 
 ## 1. Platform, data and installation. 
 
-To install the GAMM with SSB data, use the graph database Neo4j version 4.x.x or higher. The data to be downloaded from [Download](https://github.com/Redwass/GSSB/tree/main/gssb_data) is in the CSV's files. The configuration and installation commands on Windows and Linux platforms are as follows:
+To install the GAMM with SSB data, use the graph database Neo4j version 4.x.x or higher. The data to be downloaded from [Download](https://github.com/Redwass/GAMM/tree/main/data) is in the CSV's files. The configuration and installation commands on Windows and Linux platforms are as follows:
 
 ### 1.1 Neo4j configuration
 
