@@ -12,7 +12,9 @@ As the SSB data spans from 1992 to 1998, the versioning was set as follows :
 
 (2) A 2nd schema version for data from 1994 to 1996 characterised by he addition of a new Supplier dimension described by the attributes S_Name, S_Address and S_Phone, and a hierarchical levels S_City, S_Nation and S_Region. This version is valid during the period 𝑇2 =[01/01/2020,31/12/2020]
 
-(3) A 3rd version of the schema for 1997 and 1998 data characterised by the removal of the Customer dimension and the addition of a Quantity measure. This version is valid during the period 𝑇3 = [01/01/2021,31/12/2021
+(3) A 3rd version of the schema for 1997 and 1998 data characterised by the removal of the Customer dimension and the addition of a Quantity measure. This version is valid during the period 𝑇3 = [01/01/2021,31/12/2021]
+
+It should be noted that the validity period of the versions may correspond to the effective validity period of the data as well as being different for dealing with earlier data as in this case.  
 
 We were able to apply the 13 queries proposed on SSB which we took up in CRL either explicitly to query a particular version or implicitly to query all versions according to the existing schema. Some queries were readjusted to match the time intervals established during the versioning. Note that some queries has been adjusted to match the different schema versions.
 
