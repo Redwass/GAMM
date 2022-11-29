@@ -84,7 +84,7 @@ where 𝑆𝑇2 <= l.TT < 𝑆𝑇2
 return d.d_year, count(distinct(p.partkey)), sum(l.lo_revenue) 
 order by d.d_year
 ```
-Note that in the CRL, the clause : **RETURN 𝑣𝑎𝑙𝑢𝑒1,.., 𝑣𝑎𝑙𝑢𝑒𝑛 ,AGGREGATE_FUNCTION(ATTRIBUTE)** allows for grouping aggregation by 𝑣𝑎𝑙𝑢𝑒1... 𝑣𝑎𝑙𝑢𝑒𝑛.
+Note that in the CRL, the clause : **RETURN 𝑣𝑎𝑙𝑢𝑒1,.., 𝑣𝑎𝑙𝑢𝑒𝑛 , AGGREGATE_FUNCTION(ATTRIBUTE)** allows for grouping aggregation by 𝑣𝑎𝑙𝑢𝑒1... 𝑣𝑎𝑙𝑢𝑒𝑛.
 
 (2) Implicit requests: Allows the browsing of all instances related to the entities specified in the query without version restriction. This feature, which is due to the ability of graph databases to traverse instances through the relationships between entities, offers a big advantage in formulating cross-queries using the same simple queries whatever the number of versions. 
 
