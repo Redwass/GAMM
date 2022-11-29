@@ -14,11 +14,7 @@ As the SSB data spans from 1992 to 1998, the versioning was set as follows :
 
 (3) A 3rd version of the schema for 1997 and 1998 data characterised by the removal of the Customer dimension and the addition of a Quantity measure. This version is valid during the period 𝑇3 = [01/01/2021,31/12/2021
 
-the same ssb schema using the graph approach called Graph Star Schema Benchmark as shown in the figure below. The 13 SSB queries were built using Cypher Language Request (CLR) specific to the Neo4j graph database.
-
-We have established two case studies based on the Star Schema Benchmark (SSB), a 1st study for the functional validation of our approach and a 2nd study for the time performance tests for graph DW.\\
-As part of the functional validation study, we chose to perform the instantiation process on Neo4j for several  in \textisc(Figure \ref{fig_ssb_version}); then direct and cross queries were performed on it.\\ 
-
+We were able to apply the 13 queries proposed on SSB which we took up in CRL either explicitly to query a particular version or implicitly to query all versions according to the existing schema. Some queries were readjusted to match the time intervals established during the versioning. We give below as an example the 1st query of SSB in CRL. Note that the query has been adjusted by changing the attribute D_YEAR to 1997 instead of 1994 in SSB to match the versioning we established because the measure Quantity was only created from the 3rd schema version and using data from the years 1997 and 1998.
 
 ## 1. Platform, data and installation. 
 
