@@ -61,7 +61,7 @@ This is not required, but you can create the following indexes to optimise query
 
 create index index_part_category for (p:part) on (p.P_CATEGORY);
 
-create index index_part_brand for (p:part) on (p.P_BRAND1);
+create index index_part_brand for (p:part) on (p.P_BRAND);
 
 create index idxex_customer_region for (c:customer) on (c.C_REGION);
 
