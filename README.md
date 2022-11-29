@@ -77,14 +77,23 @@ GAMM offers a great flexibility in the elaboration of explicit and implicit quer
 
 (1) Explicit requests. Allow to extract data from a specific version or set of versions based on the time parameter TT using the clause where 𝑆𝑇𝑛 <=TT<𝐸𝑇𝑛 with 𝑇𝑛 =[𝑆𝑇𝑛 ,𝐸𝑇𝑛 ] is the period of validity of version 𝑉𝑛. 
 
-Exemple
+Exemple 1 :
 ```cypher
-match (m:month)<-[:date_month]-(:date)<-[:sale_date]-(s:sales)-[sale_cust]->(c:customer) 
-where 𝑆𝑇2 <= s.tt < 𝑆𝑇2 
-return c.cust_id, m.month, sum(s.sales_amt) order by m.month
+match (d:date)<-[:order_date]-(l:lineorder)-[r:order_part]->(p:part) 
+where 𝑆𝑇2 <= l.TT < 𝑆𝑇2 
+return d.d_year, count(distinct(p.partkey)), sum(l.lo_revenue) 
+order by d.d_year
 ```
-
 Note that in the CRL, the clause : RETURN 𝑣𝑎𝑙𝑢𝑒1,.., 𝑣𝑎𝑙𝑢𝑒𝑛 ,AGGREGATE_FUNCTION(ATTRIBUTE)  allows for grouping aggregation by 𝑣𝑎𝑙𝑢𝑒1... 𝑣𝑎𝑙𝑢𝑒𝑛.
+
+(2) Implicit requests: Allows the browsing of all instances related to the entities specified in the query without version restriction. This feature, which is due to the ability of graph databases to traverse instances through the relationships between entities, offers a big advantage in formulating cross-queries using the same simple queries whatever the number of versions. 
+
+Exemple 2 :
+```cypher
+match (d:date)<-[:order_date]-(l:lineorder)-[r:order_part]->(p:part) 
+return d.d_year, count(distinct(p.partkey)), sum(l.lo_revenue) 
+order by d.d_year
+```
 
 The 13 proposed queries on SSB, presented below, that we have included in the CRL are implicitly intended to query all versions according to the existing scheme. Some queries have been readjusted to match the time intervals established during versioning. For example, the first query in SSB was adjusted by changing the D_YEAR attribute to 1997 instead of 1994 in SSB to match the versioning we established because the Quantity measure was created only from the 3rd version of the schema and using data from the years 1997 and 1998.
 
