@@ -75,7 +75,7 @@ Here are the 13 SSB queries using the Cypher Language Request (CLR) and some ext
 
 GAMM offers a great flexibility in the elaboration of explicit and implicit queries which we detail through the following examples. The queries are written in Cypher Language Request CLR specific to the Neo4j graph database :
 
-(1) Explicit requests. Allow to extract data from a specific version or set of versions based on the time parameter TT using the clause **where 𝑆𝑇𝑛 <=TT<𝐸𝑇𝑛 ** with 𝑇𝑛 =[𝑆𝑇𝑛 ,𝐸𝑇𝑛 ] is the period of validity of version 𝑉𝑛. 
+(1) Explicit requests. Allow to extract data from a specific version or set of versions based on the time parameter TT using the clause **where 𝑆𝑇𝑛 <=TT<𝐸𝑇𝑛** with 𝑇𝑛 =[𝑆𝑇𝑛 ,𝐸𝑇𝑛 ] is the period of validity of version 𝑉𝑛. 
 
 Exemple 1 :
 ```cypher
@@ -84,7 +84,7 @@ where 𝑆𝑇2 <= l.TT < 𝑆𝑇2
 return d.d_year, count(distinct(p.partkey)), sum(l.lo_revenue) 
 order by d.d_year
 ```
-Note that in the CRL, the clause : **return 𝑣𝑎𝑙𝑢𝑒1,.., 𝑣𝑎𝑙𝑢𝑒𝑛 , aggregate_function(attribute)** allows for grouping aggregation by 𝑣𝑎𝑙𝑢𝑒1... 𝑣𝑎𝑙𝑢𝑒𝑛.
+Note that in the CRL, the clause : **return 𝑣𝑎𝑙𝑢𝑒 1,.., 𝑣𝑎𝑙𝑢𝑒 N , aggregate_function(attribute)** allows for grouping aggregation by 𝑣𝑎𝑙𝑢𝑒 1... 𝑣𝑎𝑙𝑢𝑒 N.
 
 (2) Implicit requests: Allows the browsing of all instances related to the entities specified in the query without version restriction. This feature, which is due to the ability of graph databases to traverse instances through the relationships between entities, offers a big advantage in formulating cross-queries using the same simple queries whatever the number of versions. 
 
