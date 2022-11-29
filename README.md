@@ -1,9 +1,16 @@
 # Graph Star Schema Benchmark (GSSB)
 The Star Schema Benchmark, or SSB, was designed to evaluate the performance of database systems for star schema data warehouse queries. The SSB schema is based on the [TPC-H benchmark] (http://www.tpc.org/tpch/), but in a modified form with LINEORDER as a central fact table and dimension tables for customer, part, supplier, and date. The queries are also based on the TPC-H queries, but the number of queries is reduced to 13 and have been chosen to cover as much of the SSB as possible, so that potential users can derive a performance evaluation of the weighted subset they expect to use in practice. They are divided into 4 subgroups according to the difficulty and the number of domensions involved. The idea is that the total number of fact table rows retrieved will be determined by the selectivity (i.e., total Filter Factor FF) of restrictions on dimensions. More details in [Paper Download](https://www.cs.umb.edu/~poneil/StarSchemaB.PDF)
 
-We generated the same ssb schema using the graph approach called Graph Star Schema Benchmark as shown in the figure below. The 13 SSB queries were built using Cypher Language Request (CLR) specific to the Neo4j graph database.
+According to the GAMM approach, we have generated 3 chronological versions using the SSB data as shown below :
 
 ![Cover](https://github.com/Redwass/GAMM/blob/main/figures/gamm_schema_evolution.jpg)
+
+
+the same ssb schema using the graph approach called Graph Star Schema Benchmark as shown in the figure below. The 13 SSB queries were built using Cypher Language Request (CLR) specific to the Neo4j graph database.
+
+We have established two case studies based on the Star Schema Benchmark (SSB), a 1st study for the functional validation of our approach and a 2nd study for the time performance tests for graph DW.\\
+As part of the functional validation study, we chose to perform the instantiation process on Neo4j for several  in \textisc(Figure \ref{fig_ssb_version}); then direct and cross queries were performed on it.\\ 
+
 
 ## 1. Platform, data and installation. 
 
