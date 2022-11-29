@@ -71,7 +71,9 @@ create index idxex_customer_city for (c:customer) on (c.C_CITY);
 
 ## 2. Queries
 
-Here is a list of SSB queries using Cypher Language Request. They can be applied on Cypher-shell or in Neo4j Browser.
+Here are the 13 SSB queries using the Cypher Request language and some extra queries to explain explicit and implicit requests in GAMM. They can be applied on Cypher-shell or in Neo4j Browser.
+
+The 13 proposed queries on SSB, presented below, that we have included in the CRL are implicitly intended to query all versions according to the existing scheme. Some queries have been readjusted to match the time intervals established during versioning. For example, the first query in SSB was adjusted by changing the D_YEAR attribute to 1997 instead of 1994 in SSB to match the versioning we established because the Quantity measure was created only from the 3rd version of the schema and using data from the years 1997 and 1998.
 
 ##### Q1.1
 
