@@ -71,7 +71,20 @@ create index idxex_customer_city for (c:customer) on (c.C_CITY);
 
 ## 2. Queries
 
-Here are the 13 SSB queries using the Cypher Request language and some extra queries to explain explicit and implicit requests in GAMM. They can be applied on Cypher-shell or in Neo4j Browser.
+Here are the 13 SSB queries using the Cypher Language Request (CLR) and some extra queries to explain explicit and implicit requests in GAMM. They can be applied on Cypher-shell or in Neo4j Browser.
+
+GAMM offers a great flexibility in the elaboration of explicit and implicit queries which we detail through the following examples. The queries are written in Cypher Language Request CLR specific to the Neo4j graph database :
+
+(1) Explicit requests. Allow to extract data from a specific version or set of versions based on the time parameter TT using the clause where 𝑆𝑇𝑛 <=TT<𝐸𝑇𝑛 with 𝑇𝑛 =[𝑆𝑇𝑛 ,𝐸𝑇𝑛 ] is the period of validity of version 𝑉𝑛. 
+
+Exemple
+```cypher
+MATCH (M:MONTH) <-[:DATE_MONTH] - (:DATE) <- [:SALE_DATE] - (S:SALES) - [SALE_CUST] -> (C:CUSTOMER) 
+WHERE 𝑆𝑇2 <= S.TT < 𝑆𝑇2 
+RETURN C.CUST_ID, M.MONTH, SUM(S.SALES_AMT) ORDER BY M.MONTH
+```
+
+Note that in the CRL, the clause : RETURN 𝑣𝑎𝑙𝑢𝑒1,.., 𝑣𝑎𝑙𝑢𝑒𝑛 ,AGGREGATE_FUNCTION(ATTRIBUTE)  allows for grouping aggregation by 𝑣𝑎𝑙𝑢𝑒1... 𝑣𝑎𝑙𝑢𝑒𝑛.
 
 The 13 proposed queries on SSB, presented below, that we have included in the CRL are implicitly intended to query all versions according to the existing scheme. Some queries have been readjusted to match the time intervals established during versioning. For example, the first query in SSB was adjusted by changing the D_YEAR attribute to 1997 instead of 1994 in SSB to match the versioning we established because the Quantity measure was created only from the 3rd version of the schema and using data from the years 1997 and 1998.
 
