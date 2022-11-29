@@ -79,9 +79,9 @@ GAMM offers a great flexibility in the elaboration of explicit and implicit quer
 
 Exemple
 ```cypher
-match (M:MONTH)<-[:DATE_MONTH]-(:DATE)<-[:SALE_DATE]-(S:SALES)-[SALE_CUST]->(C:CUSTOMER) 
-where 𝑆𝑇2 <= S.TT < 𝑆𝑇2 
-return C.CUST_ID, M.MONTH, SUM(S.SALES_AMT) ORDER BY M.MONTH
+match (m:month)<-[:date_month]-(:date)<-[:sale_date]-(s:sales)-[sale_cust]->(c:customer) 
+where 𝑆𝑇2 <= s.tt < 𝑆𝑇2 
+return c.cust_id, m.month, sum(s.sales_amt) order by m.month
 ```
 
 Note that in the CRL, the clause : RETURN 𝑣𝑎𝑙𝑢𝑒1,.., 𝑣𝑎𝑙𝑢𝑒𝑛 ,AGGREGATE_FUNCTION(ATTRIBUTE)  allows for grouping aggregation by 𝑣𝑎𝑙𝑢𝑒1... 𝑣𝑎𝑙𝑢𝑒𝑛.
