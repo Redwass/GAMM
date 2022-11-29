@@ -96,7 +96,7 @@ order by d.d_year
 ```
 The results of the queries presented in the examples are shown as follows :
 
-image à afficher 
+![Cover](https://github.com/Redwass/GAMM/blob/main/figures/queries_results.JPG)
 
 Explicit query in example 1 displays the slaes_amount per year and the number of pieces. According to TT parameter, the result is obtained only on version 2 although the dimension part has instances in all 3 versions.
 
