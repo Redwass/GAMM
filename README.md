@@ -14,11 +14,11 @@ As the SSB data spans from 1992 to 1998, the versioning was set as follows :
 
 (3) A 3rd version of the schema for 1997 and 1998 data characterised by the removal of the Customer dimension and the addition of a Quantity measure. This version is valid during the period 𝑇3 = [01/01/2021,31/12/2021
 
-We were able to apply the 13 queries proposed on SSB which we took up in CRL either explicitly to query a particular version or implicitly to query all versions according to the existing schema. Some queries were readjusted to match the time intervals established during the versioning. We give below as an example the 1st query of SSB in CRL. Note that the query has been adjusted by changing the attribute D_YEAR to 1997 instead of 1994 in SSB to match the versioning we established because the measure Quantity was only created from the 3rd schema version and using data from the years 1997 and 1998.
+We were able to apply the 13 queries proposed on SSB which we took up in CRL either explicitly to query a particular version or implicitly to query all versions according to the existing schema. Some queries were readjusted to match the time intervals established during the versioning. Note that some queries has been adjusted to match the different schema versions.
 
 ## 1. Platform, data and installation. 
 
-To install the GSSB, use the graph database Neo4j version 4.x.x or higher. The data to be downloaded from [Download](https://github.com/Redwass/GSSB/tree/main/gssb_data) is in the CSV's files. The configuration and installation commands on Windows and Linux platforms are as follows:
+To install the GAMM with SSB data, use the graph database Neo4j version 4.x.x or higher. The data to be downloaded from [Download](https://github.com/Redwass/GSSB/tree/main/gssb_data) is in the CSV's files. The configuration and installation commands on Windows and Linux platforms are as follows:
 
 ### 1.1 Neo4j configuration
 
