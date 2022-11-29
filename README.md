@@ -104,10 +104,10 @@ In the other side, implicit query in example 2 witch is same like query 1 with o
 
 The 13 proposed queries on SSB, presented below, that we have included in the CRL are implicitly intended to query all versions according to the existing scheme. Some queries have been readjusted to match the time intervals established during versioning. For example, the first query in SSB was adjusted by changing the D_YEAR attribute to 1997 instead of 1994 in SSB to match the versioning we established because the Quantity measure was created only from the 3rd version of the schema and using data from the years 1997 and 1998.
 
-##### Q1.1
+##### Q1.1 (The query will extract data from version 3 since the QUANTITY measure was only added in version 3) 
 
 ```cypher
-optional match (d:date{D_YEAR:1993})<-[r:order_date]-(l:lineorder)
+profile optional match (d:date{D_YEAR:1997})<-[r:order_date]-(l:lineorder)
 where 1<= l.LO_DISCOUNT <=3
 and l.LO_QUANTITY < 25
 return sum(l.LO_REVENUE);
