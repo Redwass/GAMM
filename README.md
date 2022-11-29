@@ -77,7 +77,7 @@ GAMM offers a great flexibility in the elaboration of explicit and implicit quer
 
 (1) Explicit requests. Allow to extract data from a specific version or set of versions based on the time parameter TT using the clause **where 𝑆𝑇𝑛 <=TT<𝐸𝑇𝑛** with 𝑇𝑛 =[𝑆𝑇𝑛 ,𝐸𝑇𝑛 ] is the period of validity of version 𝑉𝑛. 
 
-Exemple 1 :
+Example 1 :
 ```cypher
 match (d:date)<-[:order_date]-(l:lineorder)-[r:order_part]->(p:part) 
 where 𝑆𝑇2 <= l.TT < 𝑆𝑇2 
@@ -88,12 +88,19 @@ Note that in the CRL, the clause : **return 𝑣𝑎𝑙𝑢𝑒 1,.., 𝑣𝑎�
 
 (2) Implicit requests: Allows the browsing of all instances related to the entities specified in the query without version restriction. This feature, which is due to the ability of graph databases to traverse instances through the relationships between entities, offers a big advantage in formulating cross-queries using the same simple queries whatever the number of versions. 
 
-Exemple 2 :
+Example 2 :
 ```cypher
 match (d:date)<-[:order_date]-(l:lineorder)-[r:order_part]->(p:part) 
 return d.d_year, count(distinct(p.partkey)), sum(l.lo_revenue) 
 order by d.d_year
 ```
+The results of the queries presented in the examples are shown as follows :
+
+image à afficher 
+
+Explicit query in example 1 displays the slaes_amount per year and the number of pieces. According to TT parameter, the result is obtained only on version 2 although the dimension part has instances in all 3 versions.
+
+In the other side, implicit query in example 2 witch is same like query 1 with out TT parameter show the result in all 3 versions as the dimension  part exists in all these 3 versions of the scheme.
 
 The 13 proposed queries on SSB, presented below, that we have included in the CRL are implicitly intended to query all versions according to the existing scheme. Some queries have been readjusted to match the time intervals established during versioning. For example, the first query in SSB was adjusted by changing the D_YEAR attribute to 1997 instead of 1994 in SSB to match the versioning we established because the Quantity measure was created only from the 3rd version of the schema and using data from the years 1997 and 1998.
 
