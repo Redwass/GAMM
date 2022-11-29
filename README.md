@@ -1,4 +1,4 @@
-# Graph Agil  Schema Benchmark (GSSB)
+# Graph Agil Multidimensionnal Model (GAMM)
 
 The GAMM is a flexible approach to schema and data evolution in data warehouses. The model allows designers to integrate new data sources and accommodate new user requirements to enrich the analytical capabilities of the data warehouse. It is an approach based on a multi-version scalable schema model and a data warehouse stored in a unique global graph database. Each schema version (SV) is valid for a period of time (T) characterised by a Starting_Time (ST) and an Ending_Time (ET), and it corresponds to a data instance (DInst) extracted from the graph-based data warehouse. 
 
@@ -6,6 +6,13 @@ According to the GAMM approach, we have generated 3 chronological versions using
 
 ![Cover](https://github.com/Redwass/GAMM/blob/main/figures/gamm_schema_evolution.jpg)
 
+As the SSB data spans from 1992 to 1998, the versioning was set as follows :
+
+(1) A 1st schema for 1992 and 1993 data composed of a fact Sales analyzed according to the Part and Customer dimensions. The fact Sales is indicated by the measures Sales_Amount, Discount and Supplycost. The dimension Part is described by the attributes P_Name and Size and a hierarchical levels Category, Mfgr, Brand and Type. The dimension Customer is described by the attributes C_Name, C_Address and C_Phone, and a hierarchical levels C_City, C_Nation, C_Region and Segment. Note that for further study, we ourselves created these levels that were attributes in the SSB original dataset. This version is valid during the period 𝑇1 =[01/01/2019,31/12/2019] 
+
+(2) A 2nd schema version for data from 1994 to 1996 characterised by he addition of a new Supplier dimension described by the attributes S_Name, S_Address and S_Phone, and a hierarchical levels S_City, S_Nation and S_Region. This version is valid during the period𝑇2 =[01/01/2020,31/12/2020]
+
+(3) A 3rd version of the schema for 1997 and 1998 data characterised by the removal of the Customer dimension and the addition of a Quantity measure. This version is valid during the period 𝑇3 = [01/01/2021,31/12/2021
 
 the same ssb schema using the graph approach called Graph Star Schema Benchmark as shown in the figure below. The 13 SSB queries were built using Cypher Language Request (CLR) specific to the Neo4j graph database.
 
