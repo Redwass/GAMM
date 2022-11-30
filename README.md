@@ -338,16 +338,29 @@ ORDER BY d.D_YEAR ASC, revenu DESC
 
 ##### Q4.1
 
-###### Implicit version (The query will extract data from version ) 
+###### Implicit version (The query will extract data from version 2 ) 
 
 ```cypher
-
+profile optional match (cr:c_region)<-[:customer_region]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_part]->(p:part)-[:part_mfgr]->(pm:p_mfgr),
+(sr:s_region)<-[:supplier_region]-(s:supplier)<-[:order_supplier]-(l)-[:order_date]->(d:date),(cn:c_nation)<-[:customer_nation]-(c)
+where cr.C_REGION = "AMERICA" 
+and (pm.P_MFGR = "MFGR#1" or pm.P_MFGR = "MFGR#2")
+and sr.S_REGION = "AMERICA"
+return d.D_YEAR, cn.C_NATION, (sum(l.LO_REVENUE) - sum(l.LO_SUPPLYCOST)) as supplycost
+ORDER BY d.D_YEAR, cn.C_NATION;
 ```
 
-###### Explicit version
+###### Explicit version (version 2)
 
 ```cypher
-
+profile optional match (cr:c_region)<-[:customer_region]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_part]->(p:part)-[:part_mfgr]->(pm:p_mfgr),
+(sr:s_region)<-[:supplier_region]-(s:supplier)<-[:order_supplier]-(l)-[:order_date]->(d:date),(cn:c_nation)<-[:customer_nation]-(c)
+where date({year:2020,month:01}) <= l.TRANSACTION_TIME < date({year:2021,month:01})
+and cr.C_REGION = "AMERICA" 
+and (pm.P_MFGR = "MFGR#1" or pm.P_MFGR = "MFGR#2")
+and sr.S_REGION = "AMERICA"
+return d.D_YEAR, cn.C_NATION, (sum(l.LO_REVENUE) - sum(l.LO_SUPPLYCOST)) as supplycost
+ORDER BY d.D_YEAR, cn.C_NATION;
 ```
 
 ##### Q4.2
