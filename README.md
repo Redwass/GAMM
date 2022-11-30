@@ -365,28 +365,59 @@ ORDER BY d.D_YEAR, cn.C_NATION;
 
 ##### Q4.2
 
-###### Implicit version (The query will extract data from version ) 
+###### Implicit version (The query will extract data from version 2 ) 
 
 ```cypher
-
+profile optional match (cr:c_region)<-[:customer_region]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_part]->(p:part)-[:part_mfgr]->(pm:p_mfgr),
+(sr:s_region)<-[:supplier_region]-(s:supplier)<-[:order_supplier]-(l)-[:order_date]->(d:date),
+(cn:c_nation)<-[:customer_nation]-(c),(p)-[:part_category]->(pc:p_category)
+where cr.C_REGION = "AMERICA" 
+and (d.D_YEAR = 1994 or d.D_YEAR = 1995)
+and (pm.P_MFGR = "MFGR#1" or pm.P_MFGR = "MFGR#2")
+and sr.S_REGION = "AMERICA"
+return d.D_YEAR, cn.C_NATION, pc.P_CATEGORY, (sum(l.LO_REVENUE) - sum(l.LO_SUPPLYCOST)) as supplycost
+ORDER BY d.D_YEAR, cn.C_NATION, pc.P_CATEGORY;
 ```
 
 ###### Explicit version
 
 ```cypher
-
+optional match (cr:c_region)<-[:customer_region]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_part]->(p:part)-[:part_mfgr]->(pm:p_mfgr),
+(sr:s_region)<-[:supplier_region]-(s:supplier)<-[:order_supplier]-(l)-[:order_date]->(d:date),
+(cn:c_nation)<-[:customer_nation]-(c),(p)-[:part_category]->(pc:p_category)
+where date({year:2020,month:01}) <= l.TRANSACTION_TIME < date({year:2020,month:01})
+and cr.C_REGION = "AMERICA" 
+and (d.D_YEAR = 1994 or d.D_YEAR = 1995)
+and (pm.P_MFGR = "MFGR#1" or pm.P_MFGR = "MFGR#2")
+and sr.S_REGION = "AMERICA"
+return d.D_YEAR, cn.C_NATION, pc.P_CATEGORY, (sum(l.LO_REVENUE) - sum(l.LO_SUPPLYCOST)) as supplycost
+ORDER BY d.D_YEAR, cn.C_NATION, pc.P_CATEGORY;
 ```
 
 ##### Q4.3
 
-###### Implicit version (The query will extract data from version ) 
+###### Implicit version (The query will extract data from version 2 ) 
 
 ```cypher
-
+optional match (cr:c_region)<-[:customer_region]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_part]->(p:part)-[:part_category]->(pc:p_category),
+(sn:s_nation)<-[:supplier_nation]-(s:supplier)<-[:order_supplier]-(l)-[:order_date]->(d:date),(p)-[:part_brand]->(pb:p_brand),(s)-[:supplier_city]->(sc:s_city)
+where date({year:2019,month:01}) <= l.TRANSACTION_TIME <= date({year:2021,month:12})
+and cr.C_REGION = "AMERICA"
+and pc.P_CATEGORY = "MFGR#14"
+and sn.S_NATION = "UNITED STATES" 
+return d.D_YEAR, sc.S_CITY, pb.P_BRAND,(sum(l.LO_REVENUE) - sum(l.LO_SUPPLYCOST)) as supplycost
+ORDER BY d.D_YEAR, sc.S_CITY, pb.P_BRAND;
 ```
 
 ###### Explicit version
 
 ```cypher
-
+optional match (cr:c_region)<-[:customer_region]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_part]->(p:part)-[:part_category]->(pc:p_category),
+(sn:s_nation)<-[:supplier_nation]-(s:supplier)<-[:order_supplier]-(l)-[:order_date]->(d:date),(p)-[:part_brand]->(pb:p_brand),(s)-[:supplier_city]->(sc:s_city)
+where date({year:2020,month:01}) <= l.TRANSACTION_TIME < date({year:2021,month:01})
+and cr.C_REGION = "AMERICA"
+and pc.P_BRAND = "MFGR#14"
+and sn.S_NATION = "UNITED STATES" 
+return d.D_YEAR, sc.S_CITY, pb.P_BRAND,(sum(l.LO_REVENUE) - sum(l.LO_SUPPLYCOST)) as supplycost
+ORDER BY d.D_YEAR, sc.S_CITY, pb.P_BRAND;
 ```
