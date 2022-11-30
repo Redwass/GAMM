@@ -379,7 +379,7 @@ return d.D_YEAR, cn.C_NATION, pc.P_CATEGORY, (sum(l.LO_REVENUE) - sum(l.LO_SUPPL
 ORDER BY d.D_YEAR, cn.C_NATION, pc.P_CATEGORY;
 ```
 
-###### Explicit version
+###### Explicit version (version 2)
 
 ```cypher
 optional match (cr:c_region)<-[:customer_region]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_part]->(p:part)-[:part_mfgr]->(pm:p_mfgr),
@@ -409,7 +409,7 @@ return d.D_YEAR, sc.S_CITY, pb.P_BRAND,(sum(l.LO_REVENUE) - sum(l.LO_SUPPLYCOST)
 ORDER BY d.D_YEAR, sc.S_CITY, pb.P_BRAND;
 ```
 
-###### Explicit version
+###### Explicit version (version 2)
 
 ```cypher
 optional match (cr:c_region)<-[:customer_region]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_part]->(p:part)-[:part_category]->(pc:p_category),
