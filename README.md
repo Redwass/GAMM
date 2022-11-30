@@ -260,44 +260,80 @@ ORDER BY d.D_YEAR ASC, revenu DESC
 
 ##### Q3.2
 
-###### Implicit version (The query will extract data from version ) 
+###### Implicit version (The query will extract data from version 1 and 2) 
 
 ```cypher
-
+optional match (cn:c_nation)<-[:customer_nation]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_date]->(d:date),(sn:s_nation)<-[:supplier_nation]-(s:supplier)<-[:order_supplier]-(l),
+(cc:c_city)<-[:customer_city]-(c),(sc:s_city)<-[:supplier_city]-(s)
+where 1994<= d.D_YEAR <=1995
+and cn.C_NATION = "UNITED STATES"
+and sn.S_NATION = "UNITED STATES" 
+return cc.C_CITY, sc.S_CITY, d.D_YEAR, sum(l.LO_REVENUE) as revenu
+ORDER BY d.D_YEAR ASC, revenu DESC
 ```
 
-###### Explicit version
+###### Explicit version (version 2)
 
 ```cypher
+optional match (cn:c_nation)<-[:customer_nation]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_date]->(d:date),(sn:s_nation)<-[:supplier_nation]-(s:supplier)<-[:order_supplier]-(l),
+(cc:c_city)<-[:customer_city]-(c),(sc:s_city)<-[:supplier_city]-(s)
+where date({year:2019,month:01}) <= l.TRANSACTION_TIME < date({year:2022,month:01})
+and 1994<= d.D_YEAR <=1995
+and cn.C_NATION = "UNITED STATES"
+and sn.S_NATION = "UNITED STATES" 
+return cc.C_CITY, sc.S_CITY, d.D_YEAR, sum(l.LO_REVENUE) as revenu
+ORDER BY d.D_YEAR ASC, revenu DESC
 
 ```
 
 ##### Q3.3
 
-###### Implicit version (The query will extract data from version ) 
+###### Implicit version (The query will extract data from version 1 and 2) 
 
 ```cypher
-
+optional match (cc:c_city)<-[:customer_city]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_date]->(d:date),(sc:s_city)<-[:supplier_city]-(s:supplier)<-[:order_supplier]-(l)
+where 1994<= d.D_YEAR <=1995
+and (cc.C_CITY = "UNITED KI1" or cc.C_CITY = "UNITED KI5") 
+and (sc.S_CITY = "UNITED KI1" or sc.S_CITY = "UNITED KI5") 
+return cc.C_CITY, sc.S_CITY, d.D_YEAR, sum(l.LO_REVENUE) as revenu
+ORDER BY d.D_YEAR ASC, revenu DESC
 ```
 
-###### Explicit version
+###### Explicit version (version 2)
 
 ```cypher
-
+match (cc:c_city)<-[:customer_city]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_date]->(d:date),(sc:s_city)<-[:supplier_city]-(s:supplier)<-[:order_supplier]-(l)
+where date({year:2020,month:01}) <= l.TRANSACTION_TIME < date({year:2021,month:01})
+and 1994<= d.D_YEAR <=1995
+and (cc.C_CITY = "UNITED KI1" or cc.C_CITY = "UNITED KI5") 
+and (sc.S_CITY = "UNITED KI1" or sc.S_CITY = "UNITED KI5") 
+return cc.C_CITY, sc.S_CITY, d.D_YEAR, sum(l.LO_REVENUE) as revenu
+ORDER BY d.D_YEAR ASC, revenu DESC
 ```
 
 ##### Q3.4
 
-###### Implicit version (The query will extract data from version ) 
+###### Implicit version (The query will extract data from version 1 and 2) 
 
 ```cypher
-
+optional match (cc:c_city)<-[:customer_city]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_date]->(d:date),(sc:s_city)<-[:supplier_city]-(s:supplier)<-[:order_supplier]-(l)
+where (cc.C_CITY = "UNITED KI1" or cc.C_CITY = "UNITED KI5") 
+and (sc.S_CITY = "UNITED KI1" or sc.S_CITY = "UNITED KI5") 
+and d.D_YEARMONTH = "Dec1995" 
+return cc.C_CITY, sc.S_CITY, d.D_YEAR, sum(l.LO_REVENUE) as revenu
+ORDER BY d.D_YEAR ASC, revenu DESC
 ```
 
-###### Explicit version
+###### Explicit version (version 2)
 
 ```cypher
-
+optional match (cc:c_city)<-[:customer_city]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_date]->(d:date),(sc:s_city)<-[:supplier_city]-(s:supplier)<-[:order_supplier]-(l)
+where date({year:2020,month:01}) <= l.TRANSACTION_TIME <= date({year:2021,month:01})
+and (cc.C_CITY = "UNITED KI1" or cc.C_CITY = "UNITED KI5") 
+and (sc.S_CITY = "UNITED KI1" or sc.S_CITY = "UNITED KI5") 
+and d.D_YEARMONTH = "Dec1995" 
+return cc.C_CITY, sc.S_CITY, d.D_YEAR, sum(l.LO_REVENUE) as revenu
+ORDER BY d.D_YEAR ASC, revenu DESC
 ```
 
 ##### Q4.1
