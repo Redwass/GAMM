@@ -171,10 +171,10 @@ return sum(l.LO_REVENUE);
 ###### Implicit version (The query will extract data from version 2 and 3 ) 
 
 ```cypher
-optional match (pbn:p_brand_name)<-[:p_brand_name]-(pb:p_brand)<-[:part_brand]-(p:part)<-[:order_part]-(l:lineorder)-[:order_supplier]->(s:supplier)-[:supplier_region]->(sr:s_region)-[:s_region_name]->(srn:s_region_name),(d:date)<-[:order_date]-(l)
-where srn.S_REGION_NAME = "AMERICA"
-return sum(l.LO_REVENUE),d.D_YEAR,pbn.P_BRAND_NAME
-ORDER BY d.D_YEAR,pbn.P_BRAND_NAME
+profile optional match (pb:p_brand)<-[:part_brand]-(p:part)<-[:order_part]-(l:lineorder)-[:order_supplier]->(s:supplier)-[:supplier_region]->(sr:s_region),(d:date)<-[:order_date]-(l)
+where sr.S_REGION = "AMERICA"
+return sum(l.LO_REVENUE),d.D_YEAR,pb.P_BRAND
+ORDER BY d.D_YEAR, pb.P_BRAND
 ```
 
 ###### Explicit version (version 2)
