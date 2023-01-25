@@ -252,7 +252,7 @@ profile optional match (cr:c_region)<-[:customer_region]-(c:customer)<-[:order_c
 (cn:c_nation)<-[:customer_nation]-(c),(sn:s_nation)<-[:supplier_nation]-(s)
 where date({year:2021,month:01}) <= l.TRANSACTION_TIME < date({year:2022,month:01})
 and 1994<= d.D_YEAR <=1995
-and cr.C_REGION starts with "ASIA"
+and cr.C_REGION = "ASIA"
 and sr.S_REGION = "ASIA" 
 return cn.C_NATION, sn.S_NATION, d.D_YEAR, sum(l.LO_REVENUE) as revenu
 ORDER BY d.D_YEAR ASC, revenu DESC
