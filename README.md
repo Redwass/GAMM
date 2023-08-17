@@ -117,7 +117,7 @@ return sum(l.LO_REVENUE);
 
 ###### Explicit version (version 3)  
 ```cypher
-profile optional match (d:date{D_YEAR:1997})<-[r:order_date]-(l:lineorder)
+optional match (d:date{D_YEAR:1997})<-[r:order_date]-(l:lineorder)
 where date({year:2021,month:01}) <= l.TRANSACTION_TIME
 and 1<= l.LO_DISCOUNT <=3
 and l.LO_QUANTITY < 25
@@ -129,7 +129,7 @@ return sum(l.LO_REVENUE);
 ###### Implicit version (The query will extract data from version 3 ) 
 
 ```cypher
-profile optional match (d:date{D_YEARMONTHNUM:199701})<-[:order_date]-(l:lineorder)
+optional match (d:date{D_YEARMONTHNUM:199701})<-[:order_date]-(l:lineorder)
 where 4 <= l.LO_DISCOUNT <=6
 and 26 <= l.LO_QUANTITY <= 35
 return sum(l.LO_REVENUE);
@@ -138,7 +138,7 @@ return sum(l.LO_REVENUE);
 ###### Explicit version (version 3)
 
 ```cypher
-profile optional match (d:date{D_YEARMONTHNUM:199701})<-[:order_date]-(l:lineorder)
+optional match (d:date{D_YEARMONTHNUM:199701})<-[:order_date]-(l:lineorder)
 where date({year:2021,month:01}) <= l.TRANSACTION_TIME <= date({year:2021,month:12})
 and 4 <= l.LO_DISCOUNT <=6
 and 26 <= l.LO_QUANTITY <= 35
@@ -150,7 +150,7 @@ return sum(l.LO_REVENUE);
 ###### Implicit version (The query will extract data from version 3 ) 
 
 ```cypher
-profile optional match (d:date{D_YEAR:1997, D_WEEKNUMINYEAR:6})<-[r:order_date]-(l:lineorder)
+optional match (d:date{D_YEAR:1997, D_WEEKNUMINYEAR:6})<-[r:order_date]-(l:lineorder)
 where 5<= l.LO_DISCOUNT <=7
 and 26<= l.LO_QUANTITY <= 35
 return sum(l.LO_REVENUE);
@@ -159,7 +159,7 @@ return sum(l.LO_REVENUE);
 ###### Explicit version (version 3)
 
 ```cypher
-profile optional match (d:date{D_YEAR:1997, D_WEEKNUMINYEAR:6})<-[r:order_date]-(l:lineorder)
+optional match (d:date{D_YEAR:1997, D_WEEKNUMINYEAR:6})<-[r:order_date]-(l:lineorder)
 where date({year:2021,month:01}) <= l.TRANSACTION_TIME <= date({year:2021,month:12})
 and 5<= l.LO_DISCOUNT <=7
 and 26<= l.LO_QUANTITY <= 35
@@ -171,7 +171,7 @@ return sum(l.LO_REVENUE);
 ###### Implicit version (The query will extract data from version 2 and 3 ) 
 
 ```cypher
-profile optional match (pb:p_brand)<-[:part_brand]-(p:part)<-[:order_part]-(l:lineorder)-[:order_supplier]->(s:supplier)-[:supplier_region]->(sr:s_region),(d:date)<-[:order_date]-(l)
+optional match (pb:p_brand)<-[:part_brand]-(p:part)<-[:order_part]-(l:lineorder)-[:order_supplier]->(s:supplier)-[:supplier_region]->(sr:s_region),(d:date)<-[:order_date]-(l)
 where sr.S_REGION = "AMERICA"
 return sum(l.LO_REVENUE),d.D_YEAR,pb.P_BRAND
 ORDER BY d.D_YEAR, pb.P_BRAND
@@ -180,7 +180,7 @@ ORDER BY d.D_YEAR, pb.P_BRAND
 ###### Explicit version (version 2)
 
 ```cypher
-profile optional match (pb:p_brand)<-[:part_brand]-(p:part)<-[:order_part]-(l:lineorder)-[:order_supplier]->(s:supplier)-[:supplier_region]->(sr:s_region),(d:date)<-[:order_date]-(l)
+optional match (pb:p_brand)<-[:part_brand]-(p:part)<-[:order_part]-(l:lineorder)-[:order_supplier]->(s:supplier)-[:supplier_region]->(sr:s_region),(d:date)<-[:order_date]-(l)
 where date({year:2020,month:01}) <= l.TRANSACTION_TIME < date({year:2021,month:1})
 and sr.S_REGION = "AMERICA"
 return sum(l.LO_REVENUE),d.D_YEAR,pb.P_BRAND
@@ -191,7 +191,7 @@ ORDER BY d.D_YEAR, pb.P_BRAND
 ###### Implicit version (The query will extract data from version 2 and 3 ) 
 
 ```cypher
-profile optional match (pb:p_brand)<-[:part_brand]-(p:part)<-[:order_part]-(l:lineorder)-[:order_supplier]->(s:supplier)-[:supplier_region]->(sr:s_region),(d:date)<-[:order_date]-(l)
+optional match (pb:p_brand)<-[:part_brand]-(p:part)<-[:order_part]-(l:lineorder)-[:order_supplier]->(s:supplier)-[:supplier_region]->(sr:s_region),(d:date)<-[:order_date]-(l)
 where (pb.P_BRAND >= "MFGR#2221" and pb.P_BRAND <= "MFGR#2228")
 and sr.S_REGION = "ASIA"
 return sum(l.LO_REVENUE),d.D_YEAR,pb.P_BRAND
@@ -201,7 +201,7 @@ ORDER BY d.D_YEAR, pb.P_BRAND
 ###### Explicit version (version 3)
 
 ```cypher
-profile optional match (pb:p_brand)<-[:part_brand]-(p:part)<-[:order_part]-(l:lineorder)-[:order_supplier]->(s:supplier)-[:supplier_region]->(sr:s_region),(d:date)<-[:order_date]-(l)
+optional match (pb:p_brand)<-[:part_brand]-(p:part)<-[:order_part]-(l:lineorder)-[:order_supplier]->(s:supplier)-[:supplier_region]->(sr:s_region),(d:date)<-[:order_date]-(l)
 where date({year:2021,month:01}) <= l.TRANSACTION_TIME < date({year:2022,month:01})
 and (pb.P_BRAND >= "MFGR#2221" and pb.P_BRAND <= "MFGR#2228")
 and sr.S_REGION = "ASIA"
@@ -213,7 +213,7 @@ ORDER BY d.D_YEAR, pb.P_BRAND
 ###### Implicit version (The query will extract data from version 2 and 3 ) 
 
 ```cypher
-profile optional match (pb:p_brand)<-[:part_brand]-(p:part)<-[:order_part]-(l:lineorder)-[:order_supplier]->(s:supplier)-[:supplier_region]->(sr:s_region),(d:date)<-[:order_date]-(l)
+optional match (pb:p_brand)<-[:part_brand]-(p:part)<-[:order_part]-(l:lineorder)-[:order_supplier]->(s:supplier)-[:supplier_region]->(sr:s_region),(d:date)<-[:order_date]-(l)
 where pb.P_BRAND = "MFGR#2239" 
 and sr.S_REGION = "EUROPE"
 return sum(l.LO_REVENUE),d.D_YEAR,pb.P_BRAND
@@ -223,7 +223,7 @@ ORDER BY d.D_YEAR, pb.P_BRAND
 ###### Explicit version (version 2)
 
 ```cypher
-profile optional match (pb:p_brand)<-[:part_brand]-(p:part)<-[:order_part]-(l:lineorder)-[:order_supplier]->(s:supplier)-[:supplier_region]->(sr:s_region),(d:date)<-[:order_date]-(l)
+optional match (pb:p_brand)<-[:part_brand]-(p:part)<-[:order_part]-(l:lineorder)-[:order_supplier]->(s:supplier)-[:supplier_region]->(sr:s_region),(d:date)<-[:order_date]-(l)
 where date({year:2020,month:01}) <= l.TRANSACTION_TIME < date({year:2021,month:01})
 and pb.P_BRAND = "MFGR#2239" 
 and sr.S_REGION = "EUROPE"
@@ -236,7 +236,7 @@ ORDER BY d.D_YEAR, pb.P_BRAND
 ###### Implicit version (The query will extract data from version 1 and 2) 
 
 ```cypher
-profile optional match (cr:c_region)<-[:customer_region]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_date]->(d:date),(sr:s_region)<-[:supplier_region]-(s:supplier)<-[:order_supplier]-(l)
+optional match (cr:c_region)<-[:customer_region]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_date]->(d:date),(sr:s_region)<-[:supplier_region]-(s:supplier)<-[:order_supplier]-(l)
 ,(cn:c_nation)<-[:customer_nation]-(c),(sn:s_nation)<-[:supplier_nation]-(s)
 where 1994<= d.D_YEAR <=1995
 and cr.C_REGION = "ASIA"
@@ -248,7 +248,7 @@ ORDER BY d.D_YEAR ASC, revenu DESC
 ###### Explicit version (version 2)
 
 ```cypher
-profile optional match (cr:c_region)<-[:customer_region]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_date]->(d:date),(sr:s_region)<-[:supplier_region]-(s:supplier)<-[:order_supplier]-(l),
+optional match (cr:c_region)<-[:customer_region]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_date]->(d:date),(sr:s_region)<-[:supplier_region]-(s:supplier)<-[:order_supplier]-(l),
 (cn:c_nation)<-[:customer_nation]-(c),(sn:s_nation)<-[:supplier_nation]-(s)
 where date({year:2021,month:01}) <= l.TRANSACTION_TIME < date({year:2022,month:01})
 and 1994<= d.D_YEAR <=1995
@@ -263,7 +263,7 @@ ORDER BY d.D_YEAR ASC, revenu DESC
 ###### Implicit version (The query will extract data from version 1 and 2) 
 
 ```cypher
-optional match (cn:c_nation)<-[:customer_nation]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_date]->(d:date),(sn:s_nation)<-[:supplier_nation]-(s:supplier)<-[:order_supplier]-(l),
+match (cn:c_nation)<-[:customer_nation]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_date]->(d:date),(sn:s_nation)<-[:supplier_nation]-(s:supplier)<-[:order_supplier]-(l),
 (cc:c_city)<-[:customer_city]-(c),(sc:s_city)<-[:supplier_city]-(s)
 where 1994<= d.D_YEAR <=1995
 and cn.C_NATION = "UNITED STATES"
@@ -275,7 +275,7 @@ ORDER BY d.D_YEAR ASC, revenu DESC
 ###### Explicit version (version 2)
 
 ```cypher
-optional match (cn:c_nation)<-[:customer_nation]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_date]->(d:date),(sn:s_nation)<-[:supplier_nation]-(s:supplier)<-[:order_supplier]-(l),
+match (cn:c_nation)<-[:customer_nation]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_date]->(d:date),(sn:s_nation)<-[:supplier_nation]-(s:supplier)<-[:order_supplier]-(l),
 (cc:c_city)<-[:customer_city]-(c),(sc:s_city)<-[:supplier_city]-(s)
 where date({year:2019,month:01}) <= l.TRANSACTION_TIME < date({year:2022,month:01})
 and 1994<= d.D_YEAR <=1995
@@ -291,7 +291,7 @@ ORDER BY d.D_YEAR ASC, revenu DESC
 ###### Implicit version (The query will extract data from version 1 and 2) 
 
 ```cypher
-optional match (cc:c_city)<-[:customer_city]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_date]->(d:date),(sc:s_city)<-[:supplier_city]-(s:supplier)<-[:order_supplier]-(l)
+match (cc:c_city)<-[:customer_city]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_date]->(d:date),(sc:s_city)<-[:supplier_city]-(s:supplier)<-[:order_supplier]-(l)
 where 1994<= d.D_YEAR <=1995
 and (cc.C_CITY = "UNITED KI1" or cc.C_CITY = "UNITED KI5") 
 and (sc.S_CITY = "UNITED KI1" or sc.S_CITY = "UNITED KI5") 
@@ -341,7 +341,7 @@ ORDER BY d.D_YEAR ASC, revenu DESC
 ###### Implicit version (The query will extract data from version 2 ) 
 
 ```cypher
-profile optional match (cr:c_region)<-[:customer_region]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_part]->(p:part)-[:part_mfgr]->(pm:p_mfgr),
+optional match (cr:c_region)<-[:customer_region]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_part]->(p:part)-[:part_mfgr]->(pm:p_mfgr),
 (sr:s_region)<-[:supplier_region]-(s:supplier)<-[:order_supplier]-(l)-[:order_date]->(d:date),(cn:c_nation)<-[:customer_nation]-(c)
 where cr.C_REGION = "AMERICA" 
 and (pm.P_MFGR = "MFGR#1" or pm.P_MFGR = "MFGR#2")
@@ -353,7 +353,7 @@ ORDER BY d.D_YEAR, cn.C_NATION;
 ###### Explicit version (version 2)
 
 ```cypher
-profile optional match (cr:c_region)<-[:customer_region]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_part]->(p:part)-[:part_mfgr]->(pm:p_mfgr),
+optional match (cr:c_region)<-[:customer_region]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_part]->(p:part)-[:part_mfgr]->(pm:p_mfgr),
 (sr:s_region)<-[:supplier_region]-(s:supplier)<-[:order_supplier]-(l)-[:order_date]->(d:date),(cn:c_nation)<-[:customer_nation]-(c)
 where date({year:2020,month:01}) <= l.TRANSACTION_TIME < date({year:2021,month:01})
 and cr.C_REGION = "AMERICA" 
@@ -368,7 +368,7 @@ ORDER BY d.D_YEAR, cn.C_NATION;
 ###### Implicit version (The query will extract data from version 2 ) 
 
 ```cypher
-profile optional match (cr:c_region)<-[:customer_region]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_part]->(p:part)-[:part_mfgr]->(pm:p_mfgr),
+optional match (cr:c_region)<-[:customer_region]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_part]->(p:part)-[:part_mfgr]->(pm:p_mfgr),
 (sr:s_region)<-[:supplier_region]-(s:supplier)<-[:order_supplier]-(l)-[:order_date]->(d:date),
 (cn:c_nation)<-[:customer_nation]-(c),(p)-[:part_category]->(pc:p_category)
 where cr.C_REGION = "AMERICA" 
