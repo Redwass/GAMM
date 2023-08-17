@@ -109,7 +109,7 @@ We present below an implicit and explicit version of each of the 13 proposed que
 ###### Implicit version (The query will extract data from version 3 since the QUANTITY measure was only added in version 3 ) 
 
 ```cypher
-profile optional match (d:date{D_YEAR:1997})<-[r:order_date]-(l:lineorder)
+optional match (d:date{D_YEAR:1997})<-[r:order_date]-(l:lineorder)
 where 1<= l.LO_DISCOUNT <=3
 and l.LO_QUANTITY < 25
 return sum(l.LO_REVENUE);
@@ -302,7 +302,7 @@ ORDER BY d.D_YEAR ASC, revenu DESC
 ###### Explicit version (version 2)
 
 ```cypher
-match (cc:c_city)<-[:customer_city]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_date]->(d:date),(sc:s_city)<-[:supplier_city]-(s:supplier)<-[:order_supplier]-(l)
+optional match (cc:c_city)<-[:customer_city]-(c:customer)<-[:order_customer]-(l:lineorder)-[:order_date]->(d:date),(sc:s_city)<-[:supplier_city]-(s:supplier)<-[:order_supplier]-(l)
 where date({year:2020,month:01}) <= l.TRANSACTION_TIME < date({year:2021,month:01})
 and 1994<= d.D_YEAR <=1995
 and (cc.C_CITY = "UNITED KI1" or cc.C_CITY = "UNITED KI5") 
